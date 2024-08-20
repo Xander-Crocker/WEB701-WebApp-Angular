@@ -18,3 +18,7 @@
 - Run the application 
 
   `ng serve`# codelabs-homes-app-start
+
+- Run the Json server
+
+  `json-server --watch db.json`
