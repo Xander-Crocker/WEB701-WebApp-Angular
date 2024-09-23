@@ -6,6 +6,7 @@ import { UserService } from '../user.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
+
 @Component({
   selector: 'app-details',
   standalone: true,
@@ -23,9 +24,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
           <label id="password">Password</label>
           <input id="password" type="password" formControlName="password">
 
-          <label id="admin">Admin</label>
-          <mat-checkbox>Checkbox</mat-checkbox>
-
+          <label id="admin">Admin</label><mat-checkbox></mat-checkbox>
+          <br>
           <button type="submit" class="primary">Register</button>
         </form>
       </section>
