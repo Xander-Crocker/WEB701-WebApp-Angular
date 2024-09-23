@@ -1,45 +1,39 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HousingLocationComponent } from '../housing-location/housing-location.component';
-import { HousingLocation } from '../housing-location';
-import { HousingService } from '../housing.service';
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HousingLocationComponent],
+  imports: [CommonModule],
   template: `
     <section>
       <form>
-        <input type="text" placeholder="Filter by City" #filter>
-        <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
+        <p>Content</p>
       </form>
-    </section>
-    <section class="results">
-      <!-- ngFor is a forloop in Angular -->
-      <app-housing-location *ngFor="let housingLocation of filteredLocationList" [housingLocation]="housingLocation"></app-housing-location>
     </section>
   `,
   styleUrls: ['./home.component.css']
 })
 
 export class HomeComponent {
-  housingLocationList: HousingLocation[] = [];
-  housingService: HousingService = inject(HousingService);
-  filteredLocationList: HousingLocation[] = [];
+  userList: User[] = [];
+  userService: UserService = inject(UserService);
+  filteredUserList: User[] = [];
 
   constructor() {
-    this.housingService.getAllHousingLocations().then((housingLocationsList: HousingLocation[]) => {
-      this.housingLocationList = housingLocationsList;
-      this.filteredLocationList = housingLocationsList;
+    this.userService.getAllUsers().then((userList: User[]) => {
+      this.userList = userList;
+      this.userList = userList;
     });
   }
 
   filterResults(text: string) {
-    if (!text) this.filteredLocationList = this.housingLocationList;
+    if (!text) this.filteredUserList = this.userList;
 
-    this.filteredLocationList = this.housingLocationList.filter(
-      housingLocation => housingLocation?.city.toLowerCase().includes(text.toLowerCase())
+    this.filteredUserList = this.userList.filter(
+      user => user?.username.toLowerCase().includes(text.toLowerCase())
     );
   }
 
