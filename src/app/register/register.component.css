@@ -72,3 +72,8 @@ input {
     height: 400px;
     }
 }
+
+.checkbox {
+    display: inline-block;
+    padding-bottom: 30px;
+}

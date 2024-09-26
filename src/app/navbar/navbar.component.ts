@@ -21,6 +21,6 @@ import { RouterModule } from '@angular/router';
   imports: [HomeComponent, RouterModule]
 })
 export class NavbarComponent {
-  title = 'homes';
+  title = 'navbar';
 
 }

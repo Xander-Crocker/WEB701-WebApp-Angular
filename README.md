@@ -8,6 +8,6 @@
 
   `ng serve`
 
-- Run the Json server
+- In the terminal navigate to the server folder and run the following command to connect to MongoDB: 
 
-  `json-server --watch db.json`
+  `node --env-file=config.env server`

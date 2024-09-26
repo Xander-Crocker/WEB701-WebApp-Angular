@@ -5,7 +5,7 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class UserService {
-  url = 'http://localhost:3000/users';
+  url = 'http://localhost:5050/api/user/all';
 
   constructor() { }
 

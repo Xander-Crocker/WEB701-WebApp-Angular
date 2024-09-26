@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { User } from '../user';
-import { UserService } from '../user.service';
+
 
 @Component({
   selector: 'app-home',
@@ -10,7 +9,8 @@ import { UserService } from '../user.service';
   template: `
     <section>
       <form>
-        <p>Content</p>
+        <h3>Home Content</h3>
+        <p>Content that a user without admin permissions can access</p>
       </form>
     </section>
   `,
@@ -18,23 +18,7 @@ import { UserService } from '../user.service';
 })
 
 export class HomeComponent {
-  userList: User[] = [];
-  userService: UserService = inject(UserService);
-  filteredUserList: User[] = [];
-
-  constructor() {
-    this.userService.getAllUsers().then((userList: User[]) => {
-      this.userList = userList;
-      this.userList = userList;
-    });
+  ngOnInit() {
+    console.log('Home Component initialized');
   }
-
-  filterResults(text: string) {
-    if (!text) this.filteredUserList = this.userList;
-
-    this.filteredUserList = this.userList.filter(
-      user => user?.username.toLowerCase().includes(text.toLowerCase())
-    );
-  }
-
 }
