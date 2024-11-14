@@ -23,7 +23,7 @@ import { User } from '../user';
             <tr *ngFor="let user of filteredUserList">
               <td>{{ user.username }}</td>
               <td>{{ user.password }}</td>
-              <td>{{ user.admin }}</td>
+              <td>{{ user.roles }}</td>
             </tr>
           </tbody>
         </table>

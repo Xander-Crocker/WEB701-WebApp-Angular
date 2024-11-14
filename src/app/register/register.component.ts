@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import axios from 'axios';
+
+const API_URL = "http://localhost:8081/api/auth/";
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatCheckboxModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule],
   template: `
     <article>
       <section class="listing-apply">
@@ -17,10 +18,12 @@ import { RouterModule } from '@angular/router';
           <label id="username">Username</label>
           <input id="username" type="username" formControlName="username">
 
+          <label id="email">Email</label>
+          <input id="email" type="email" formControlName="email">
+
           <label id="password">Password</label>
           <input id="password" type="password" formControlName="password">
 
-          <label id="admin" class="checkbox">Admin</label><mat-checkbox formControlName="isAdmin"></mat-checkbox>
           <br>
           <button type="submit" class="primary">Register</button>
         </form>
@@ -35,6 +38,7 @@ import { RouterModule } from '@angular/router';
 export class RegisterComponent {
   applyForm = new FormGroup({
     username: new FormControl(''),
+    email: new FormControl(''),
     password: new FormControl(''),
     isAdmin: new FormControl(false),
   });
@@ -46,25 +50,18 @@ export class RegisterComponent {
 
   submitApplication() {
     const formData = this.applyForm.value;
-    fetch('http://localhost:5050/api/user/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-      this.successMessage = 'User registered successfully';
-      this.errorMessage = null;
-      console.log('User registered', data);
-      this.router.navigate(['/login']);
-        })
-        .catch(error => {
-      this.errorMessage = 'Registration error';
-      this.successMessage = null;
-      console.error('Error:', error);
-    });
-  }
 
+    axios.post(API_URL + 'signup', formData)
+      .then(response => {
+        this.successMessage = 'User registered successfully';
+        this.errorMessage = null;
+        console.log('User registered', response.data);
+        this.router.navigate(['/login']);
+      })
+      .catch(error => {
+        this.errorMessage = error.response?.data?.message || 'Registration error';
+        this.successMessage = null;
+        console.error('Error:', error);
+      });
+  }
 }

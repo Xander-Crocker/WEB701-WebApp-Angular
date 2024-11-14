@@ -1,10 +1,11 @@
-import mongoose, { Schema, Document } from 'mongoose';
-
+import mongoose, { Document } from 'mongoose';
 export interface User {
-    id: number,
-    username: string,
-    password: string,
-    admin: boolean
+    id: number;
+    username: string;
+    email: string;
+    password: string;
+    roles: string[];
+    token: string;
 }
 interface IUser extends Document {
     id: number;
@@ -13,11 +14,12 @@ interface IUser extends Document {
     admin: boolean;
 }
 
-const UserSchema: Schema = new Schema({
-    id: { type: Number, required: true },
-    username: { type: String, required: true },
+const UserSchema = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    admin: { type: Boolean, required: true }
+    roles: [{ type: String }],
+    token: { type: String, defaultValue: '' }
 });
 
 const User = mongoose.model<IUser>('User', UserSchema);
