@@ -8,6 +8,9 @@
 
   `ng serve`
 
-- In the terminal navigate to the server folder and run the following command to connect to MongoDB: 
+- Make sure that the server is running in the WEB701-React-Prototype-v2 repository 
+In the terminal navigate to the server folder and run the following command to connect to MongoDB: 
 
-  `node --env-file=config.env server`
+  `cd web701-react-prototype-v2/auth-backend`
+
+  `node server.js`
