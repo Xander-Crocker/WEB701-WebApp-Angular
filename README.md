@@ -1,6 +1,6 @@
 # Angular Homes App
 
-- Install the depencies
+- Install the dependencies
 
   `npm install` 
 
@@ -8,7 +8,8 @@
 
   `ng serve`
 
-- Make sure that the server is running in the WEB701-React-Prototype-v2 repository 
+Make sure that the server is running in the WEB701-React-Prototype-v2 repository.
+</br>
 In the terminal navigate to the server folder and run the following command to connect to MongoDB: 
 
   `cd web701-react-prototype-v2/auth-backend`
