@@ -36,6 +36,7 @@ const API_URL = "http://localhost:8081/api/auth/";
 })
 
 export class RegisterComponent {
+  // Define the registration form with username, email, password, and isAdmin fields
   applyForm = new FormGroup({
     username: new FormControl(''),
     email: new FormControl(''),
@@ -43,22 +44,30 @@ export class RegisterComponent {
     isAdmin: new FormControl(false),
   });
 
+  // Variables to store the success and error messages
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
+  // Inject the Router service for navigation
   constructor(private router: Router) {}
 
+  // Method to handle form submission
   submitApplication() {
+     // Extract form data
     const formData = this.applyForm.value;
 
+    // Send a POST request to the registration API
     axios.post(API_URL + 'signup', formData)
+      // Handle successful registration
       .then(response => {
         this.successMessage = 'User registered successfully';
         this.errorMessage = null;
         console.log('User registered', response.data);
+        // Navigate to the login page
         this.router.navigate(['/login']);
       })
       .catch(error => {
+        // Handle errors and display an error message
         this.errorMessage = error.response?.data?.message || 'Registration error';
         this.successMessage = null;
         console.error('Error:', error);

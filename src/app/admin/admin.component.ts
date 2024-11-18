@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { User } from '../user';
 
@@ -34,13 +34,17 @@ import { User } from '../user';
 })
 
 export class AdminComponent {
+  // List of all users
   userList: User[] = [];
+  // List of users to be displayed, can be filtered
   filteredUserList: User[] = [];
 
+  // Lifecycle hook that is called after data-bound properties are initialized
   ngOnInit() {
     this.fetchUsers();
   }
 
+  // Method to fetch users from the server
   async fetchUsers() {
     try {
       const response = await fetch('http://localhost:5050/api/user/all/');
